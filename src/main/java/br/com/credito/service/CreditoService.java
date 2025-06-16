@@ -5,6 +5,7 @@ import br.com.credito.dto.CreditoDTO;
 import br.com.credito.repository.CreditoRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +15,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CreditoService {
 
+    @Autowired
+    private KafkaPublisherService kafkaPublisherService;
+
     private final CreditoRepository creditoRepository;
     private final ModelMapper modelMapper;
 
     public List<CreditoDTO> getCreditosByNfse(String numeroNfse) {
+
+        kafkaPublisherService.enviarEventoConsulta(numeroNfse);
+
         return creditoRepository.findByNumeroNfse(numeroNfse)
                 .stream()
                 .map(this::toDTO)
@@ -29,6 +36,9 @@ public class CreditoService {
         }
 
     public CreditoDTO getCreditoByNumeroCredito(String numeroCredito) {
+
+        kafkaPublisherService.enviarEventoConsulta(numeroCredito);
+
         Credito credito = creditoRepository.findCreditoByNumeroCredito(numeroCredito);
         return toDTO(credito);
     }
