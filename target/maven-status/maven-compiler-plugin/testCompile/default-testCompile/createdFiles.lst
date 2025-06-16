@@ -1,0 +1,7 @@
+br/com/credito/service/CreditoServiceIntegrationTest.class
+br/com/credito/controller/ConsultaControllerTest$GetCreditosByCredito.class
+br/com/credito/controller/ConsultaControllerTest$GetCreditosByNfse.class
+br/com/credito/controller/ConsultaControllerTest.class
+br/com/credito/service/CreditoServiceTest$getCreditoByNumeroCredito.class
+br/com/credito/service/CreditoServiceTest$GetCreditosByNfse.class
+br/com/credito/service/CreditoServiceTest.class
